@@ -4,6 +4,10 @@ import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
 import cookieParser from "cookie-parser";
 import multer from "multer";
+import dotenv from "dotenv";
+dotenv.config();
+
+const port = process.env.PORT || 8800;
 
 const app = express();
 
@@ -31,4 +35,5 @@ app.use("/api/posts", postRoutes);
 
 app.listen(8800, () => {
   console.log("Connected!");
+  console.log(`Listening on port ${port}`);
 });
