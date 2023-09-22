@@ -32,8 +32,10 @@ export const addPost = (req, res) => {
   //   if (err) return res.status(403).json("Token is not valid!");
   // });
 
+  const userId = req.body.userId; // Extract the userId from the request body
+
   const q =
-    "INSERT INTO posts(`title`, `desc`, `img`, `cat`, `date`,`uid`) VALUES (?)";
+    "INSERT INTO posts(`title`, `desc`, `img`, `cat`, `date`,`uid`) VALUES (?, ?, ?, ?, ?, ?)";
 
   const values = [
     req.body.title,
@@ -41,10 +43,10 @@ export const addPost = (req, res) => {
     req.body.img,
     req.body.cat,
     req.body.date,
-    userInfo.id,
+    userId, // Use the extracted userId
   ];
 
-  db.query(q, [values], (err, data) => {
+  db.query(q, values, (err, data) => {
     if (err) return res.status(500).json(err);
     return res.json("Post has been created.");
   });
