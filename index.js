@@ -28,7 +28,7 @@ app.use(cors(corsOptions));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "api/public/upload");
+    cb(null, "public/upload");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
