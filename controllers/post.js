@@ -1,5 +1,6 @@
 import { db } from "../db.js";
 import jwt from "jsonwebtoken";
+import multer from "multer";
 
 export const getPosts = (req, res) => {
   const q = req.query.cat
