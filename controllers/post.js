@@ -72,35 +72,21 @@ export const addPost = (req, res) => {
 // };
 
 export const deletePost = (req, res) => {
-  // const token = req.cookies.access_token;
-  // if (!token) return res.status(401).json("Not authenticated!");
-
-  // jwt.verify(token, "jwtkey", (err, userInfo) => {
-  //   if (err) return res.status(403).json("Token is not valid!");
-  // });
-
   const postId = req.params.id;
-  const userId = req.body.userId; // Extract the userId from the request body
 
-  const q = "DELETE FROM posts WHERE `id` = ? AND `uid` = ?";
+  const q = "DELETE FROM posts WHERE `id` = ?";
 
-  db.query(q, [postId, userId], (err, data) => {
+  db.query(q, [postId], (err, data) => {
     if (err) {
-      // Check if the error indicates that the post doesn't exist or the user doesn't have permission
-      if (err.code === "ER_ROW_NOT_FOUND") {
-        return res
-          .status(404)
-          .json("Post not found or you don't have permission to delete it.");
-      }
       return res.status(500).json(err);
     }
 
-    // Check if no rows were affected, indicating the user doesn't have permission
+    // Check if no rows were affected
     if (data.affectedRows === 0) {
-      return res.status(403).json("You can delete only your post!");
+      return res.status(404).json("Post not found.");
     }
 
-    return res.json("Post has been deleted!");
+    return res.json("Post has been deleted.");
   });
 };
 
