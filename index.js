@@ -17,7 +17,8 @@ app.use(cookieParser());
 
 // Define CORS options
 const corsOptions = {
-  origin: "http://localhost:3000", // Replace with the actual frontend domain
+  origin:
+    "https://65114fe7b7080372f03405db--legendary-semolina-2eb566.netlify.app/", // Replace with the actual frontend domain
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true, // Enable credentials (cookies, headers) to be included in the request
   optionsSuccessStatus: 204, // Set the status code for successful preflight requests
